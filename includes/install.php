@@ -91,6 +91,7 @@ if ( $multisite ) {
 	$error = populate_network( 1, WP_TESTS_DOMAIN, WP_TESTS_EMAIL, $title, '/', $subdomain_install );
 	
 	if ( is_wp_error( $error ) ) {
+		echo 'Error populating network: ' . $error->get_error_message() . PHP_EOL;
 		wp_die( $error );	
 	}
 	
