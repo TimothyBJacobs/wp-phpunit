@@ -97,8 +97,10 @@ if ( file_exists( DIR_TESTDATA . '/themedir1' ) ) {
 }
 
 if ( '1' !== getenv( 'WP_TESTS_SKIP_INSTALL' ) ) {
-	echo $config_file_path . PHP_EOL;
-	echo file_get_contents($config_file_path) . PHP_EOL;
+	if ( getenv( 'WP_PHPUNIT__TESTS_CONFIG' ) ) {
+		echo WP_PHPUNIT__TESTS_CONFIG . PHP_EOL;
+		echo file_get_contents( WP_PHPUNIT__TESTS_CONFIG ) . PHP_EOL;
+	}
 	
 	system( WP_PHP_BINARY . ' ' . escapeshellarg( __DIR__ . '/install.php' ) . ' ' . escapeshellarg( $config_file_path ) . ' ' . $multisite, $retval );
 	if ( 0 !== $retval ) {
